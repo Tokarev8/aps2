@@ -1,0 +1,123 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentEmployeesDetails.id">
+    <h4>Информационная карточка сотрудника</h4>
+    <div>
+      <label><strong>Номер паспорта:</strong></label> {{ currentEmployeesDetails.passportID }}
+    </div>
+    <div>
+      <label><strong>Телефон:</strong></label>
+      {{ currentEmployeesDetails.telephone }}
+    </div>
+    <div>
+      <label><strong>Электронная почта:</strong></label>
+      {{ currentEmployeesDetails.email }}
+    </div>
+    <div>
+      <label><strong>Адрес:</strong></label>
+      {{ currentEmployeesDetails.address }}
+    </div>
+    <div>
+      <label><strong>Образование:</strong></label>
+      {{ currentEmployeesDetails.education }}
+    </div>
+    <div>
+      <label><strong>ИНН:</strong></label>
+      {{ currentEmployeesDetails.inn }}
+    </div>
+    <a class="badge badge-warning"
+      routerLink="/employees-details/{{ currentEmployeesDetails.id }}">
+      Редактировать
+    </a>
+  </div>
+
+  <div *ngIf="!currentEmployeesDetails">
+    <br />
+    <p>Пожалуйста кликните на инфромационную карточку...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentEmployeesDetails.id" class="edit-form">
+    <h4>Инфромационная карточка</h4>
+    <form>
+      <div class="form-group">
+        <label for="passportID">Паспортные данные</label>
+        <input
+          type="text"
+          class="form-control"
+          id="passportID"
+          [(ngModel)]="currentEmployeesDetails.passportID"
+          name="passportID"
+        />
+      </div>
+      <div class="form-group">
+        <label for="telephone">Телефон</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telephone"
+          [(ngModel)]="currentEmployeesDetails.telephone"
+          name="telephone"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Электронная почта</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="currentEmployeesDetails.email"
+          name="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="address">Адрес</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          [(ngModel)]="currentEmployeesDetails.address"
+          name="address"
+        />
+      </div>
+      <div class="form-group">
+        <label for="education">Образование</label>
+        <input
+          type="text"
+          class="form-control"
+          id="education"
+          [(ngModel)]="currentEmployeesDetails.education"
+          name="education"
+        />
+      </div>
+      <div class="form-group">
+        <label for="inn">ИНН</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inn"
+          [(ngModel)]="currentEmployeesDetails.inn"
+          name="inn"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteEmployeesDetails()">
+      Удалить
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateEmployeesDetails()"
+    >
+      Обновить
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentEmployeesDetails.id">
+    <br />
+    <p>Cannot access this Department...</p>
+  </div>
+</ng-template>

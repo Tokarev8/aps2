@@ -1,0 +1,35 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Наименование должности</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="position.title"
+          name="title"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="salary">Оклад</label>
+        <input
+          class="form-control"
+          id="salary"
+          required
+          [(ngModel)]="position.salary"
+          name="salary"
+        />
+      </div>
+
+      <button (click)="savePosition()" class="btn btn-success">Отправить</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Должность успешно создана!</h4>
+      <button class="btn btn-success" (click)="newPosition()">Добавить</button>
+    </div>
+  </div>
+</div>

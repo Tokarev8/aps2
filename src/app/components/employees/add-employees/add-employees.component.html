@@ -1,0 +1,101 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="surname">Фамилия сотрудника</label>
+        <input
+          class="form-control"
+          id="surname"
+          required
+          [(ngModel)]="employees.surname"
+          name="surname"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Имя сотрудника</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="employees.name"
+          name="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="secondName">Отчество сотрудника</label>
+        <input
+          class="form-control"
+          id="secondName"
+          required
+          [(ngModel)]="employees.secondName"
+          name="secondName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Пол сотрудника</label>
+        <select
+          class="form-control"
+          id="gender"
+          required
+          [(ngModel)]="employees.gender"
+          name="gender">
+          <option>Мужской</option>
+          <option>Женский</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="departmentID">Подразделение сотрудника, выберите подразделение</label>
+        <select
+          class="form-control"
+          id="departmentID"
+          required
+          [(ngModel)]="departmentID"
+          name="departmentID">
+          <option *ngFor="let item of departments | async; let i = index" value="{{getDepartmentId(item)}}">
+            {{getDepartmentName(item)}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="cardDetailsID">Информационная карта сотрудника, выберите номер паспорта</label>
+        <select
+          class="form-control"
+          id="cardDetailsID"
+          required
+          [(ngModel)]="cardDetailsID"
+          name="cardDetailsID">
+          <option *ngFor="let item of cardsDetailsID | async; let i = index" value="{{getCardId(item)}}">
+            {{getPasportID(item)}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="cardDetailsID">Должность, выберите должность</label>
+        <select
+          class="form-control"
+          id="cardDetailsID"
+          required
+          [(ngModel)]="positionID"
+          name="cardDetailsID">
+          <option *ngFor="let item of positions | async; let i = index" value="{{item.id}}">
+            {{item.title}}
+          </option>
+        </select>
+      </div>
+
+      <button (click)="saveEmployees()" class="btn btn-success">Отправить</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Инфромационная карта успешно создана!</h4>
+      <button class="btn btn-success" (click)="newEmployees()">Добавить</button>
+    </div>
+  </div>
+</div>

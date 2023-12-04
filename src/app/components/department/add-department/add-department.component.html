@@ -1,0 +1,35 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="departmentName">Наименование Подразделения</label>
+        <input
+          type="text"
+          class="form-control"
+          id="departmentName"
+          required
+          [(ngModel)]="department.departmentName"
+          name="departmentName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="subDepartmentName">Участок</label>
+        <input
+          class="form-control"
+          id="subDepartmentName"
+          required
+          [(ngModel)]="department.subDepartmentName"
+          name="subDepartmentName"
+        />
+      </div>
+
+      <button (click)="saveDepartment()" class="btn btn-success">Отправить</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Подразделение успешно создана!</h4>
+      <button class="btn btn-success" (click)="newDepartment()">Добавить</button>
+    </div>
+  </div>
+</div>

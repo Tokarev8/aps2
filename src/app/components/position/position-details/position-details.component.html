@@ -1,0 +1,67 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentPosition.id">
+    <h4>Должность</h4>
+    <div>
+      <label><strong>Должность:</strong></label> {{ currentPosition.title }}
+    </div>
+    <div>
+      <label><strong>Оклад:</strong></label>
+      {{ currentPosition.salary + " Р" }}
+    </div>
+    <a class="badge badge-warning"
+      routerLink="/positions/{{ currentPosition.id }}">
+      Редактировать
+    </a>
+  </div>
+
+  <div *ngIf="!currentPosition">
+    <br />
+    <p>Пожалуйста кликните на должность...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentPosition.id" class="edit-form">
+    <h4>Должность</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Наименование</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentPosition.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="salary">Оклад</label>
+        <input
+          type="text"
+          class="form-control"
+          id="salary"
+          [(ngModel)]="currentPosition.salary"
+          name="salary"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deletePosition()">
+      Удалить
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updatePosition()"
+    >
+      Обновить
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentPosition.id">
+    <br />
+    <p>Cannot access this Position...</p>
+  </div>
+</ng-template>

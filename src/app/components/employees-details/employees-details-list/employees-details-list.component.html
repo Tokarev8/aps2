@@ -1,0 +1,44 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Поиск по номеру паспорта"
+        [(ngModel)]="passportID"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchPassportID()"
+        >
+          Поиск
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Список Инфромационных карточек сотрудников</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let item of employeesDetails; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveEmployeesDetails(item, i)"
+      >
+        {{"Карточка №" + item?.id }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllEmployeesDetails()">
+      Удалить все
+    </button>
+  </div>
+  <div class="col-md-6">
+    <app-employees-details-details
+      [viewMode]="true"
+      [currentEmployeesDetails]="currentemployeesDetails"
+    ></app-employees-details-details>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentEmployees.id">
+    <h4>Персонал</h4>
+    <div>
+      <label><strong>Имя:</strong></label>
+      {{ currentEmployees.name }}
+    </div>
+    <div>
+      <label><strong>Фамилия:</strong></label>
+      {{ currentEmployees.surname }}
+    </div>
+    <div>
+      <label><strong>Отчество:</strong></label>
+      {{ currentEmployees.secondName }}
+    </div>
+    <div>
+      <label><strong>Пол:</strong></label>
+      {{ currentEmployees.gender }}
+    </div>
+    <div>
+      <label><strong>Должность:</strong></label>
+      {{ (position | async)?.title}}
+    </div>
+    <div>
+      <label><strong>Подразделение:</strong></label>
+      {{ (department | async)?.subDepartmentName}}
+    </div>
+    <div>
+      <label><strong>Инфромационная карта №:</strong></label>
+      {{ currentEmployees.cardDetailsID }}
+    </div>
+    <a class="badge badge-warning"
+      routerLink="/employees/{{ currentEmployees.id }}">
+      Редактировать
+    </a>
+  </div>
+
+  <div *ngIf="!currentEmployees">
+    <br />
+    <p>Пожалуйста кликните на сотрудника...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentEmployees.id" class="edit-form">
+    <h4>Сотрудник</h4>
+    <form>
+      <div class="form-group">
+        <label for="passportID">Имя</label>
+        <input
+          type="text"
+          class="form-control"
+          id="passportID"
+          [(ngModel)]="currentEmployees.name"
+          name="passportID"
+        />
+      </div>
+      <div class="form-group">
+        <label for="telephone">Фамилия</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telephone"
+          [(ngModel)]="currentEmployees.surname"
+          name="telephone"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Отчество</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="currentEmployees.secondName"
+          name="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="address">Пол</label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          [(ngModel)]="currentEmployees.gender"
+          name="address"
+        />
+      </div>
+      <div class="form-group">
+        <label for="departmentID">Подразделение</label>
+        <select
+          class="form-control"
+          id="departmentID"
+          required
+          [(ngModel)]="currentEmployees.departmentID"
+          name="departmentID">
+          <option *ngFor="let item of departments | async; let i = index" value="{{getDepartmentId(item)}}">
+            {{getDepartmentName(item)}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cardDetailsID">Информационная карточка</label>
+        <select
+          class="form-control"
+          id="cardDetailsID"
+          required
+          [(ngModel)]="currentEmployees.cardDetailsID"
+          name="cardDetailsID">
+          <option *ngFor="let item of cardsDetails | async; let i = index" value="{{getCardId(item)}}">
+            {{getPasportID(item)}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="positionID">Должность</label>
+        <select
+          class="form-control"
+          id="positionID"
+          required
+          [(ngModel)]="currentEmployees.positionID"
+          name="positionID">
+          <option *ngFor="let item of positions | async; let i = index" value="{{getPositionId(item)}}">
+            {{item.title}}
+          </option>
+        </select>
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteEmployees()">
+      Удалить
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateEmployees()"
+    >
+      Обновить
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentEmployees.id">
+    <br />
+    <p>Cannot access this Department...</p>
+  </div>
+</ng-template>

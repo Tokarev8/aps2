@@ -1,0 +1,15 @@
+.authorization {
+  padding-top: 60px;
+  margin: auto;
+  width: 500px;
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.registration {
+  margin-left: 20px;
+}

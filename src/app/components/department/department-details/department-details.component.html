@@ -1,0 +1,67 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentDepartment.id">
+    <h4>Подразделение</h4>
+    <div>
+      <label><strong>Цех:</strong></label> {{ currentDepartment.departmentName }}
+    </div>
+    <div>
+      <label><strong>Участок:</strong></label>
+      {{ currentDepartment.subDepartmentName }}
+    </div>
+    <a class="badge badge-warning"
+      routerLink="/departments/{{ currentDepartment.id }}">
+      Редактировать
+    </a>
+  </div>
+
+  <div *ngIf="!currentDepartment">
+    <br />
+    <p>Пожалуйста кликните на подразделение...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentDepartment.id" class="edit-form">
+    <h4>Подразделение</h4>
+    <form>
+      <div class="form-group">
+        <label for="departmentName">Цех</label>
+        <input
+          type="text"
+          class="form-control"
+          id="departmentName"
+          [(ngModel)]="currentDepartment.departmentName"
+          name="departmentName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="subDepartmentName">Участок</label>
+        <input
+          type="text"
+          class="form-control"
+          id="subDepartmentName"
+          [(ngModel)]="currentDepartment.subDepartmentName"
+          name="subDepartmentName"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteDepartment()">
+      Удалить
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateDepartment()"
+    >
+      Обновить
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentDepartment.id">
+    <br />
+    <p>Cannot access this Department...</p>
+  </div>
+</ng-template>

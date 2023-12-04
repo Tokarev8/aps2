@@ -1,0 +1,96 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="employeesID">Сотрудник</label>
+        <select
+          class="form-control"
+          id="employeesID"
+          required
+          [(ngModel)]="employeesID"
+          name="employeesID">
+          <option *ngFor="let item of employees | async; let i = index" value="{{item.id}}">
+            {{getName(item)}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="passportID">Номер Паспорта</label>
+        <input
+          type="text"
+          class="form-control"
+          id="passportID"
+          required
+          [(ngModel)]="employeesDetails.passportID"
+          name="passportID"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="telephone">Телефон</label>
+        <input
+          class="form-control"
+          id="telephone"
+          required
+          [(ngModel)]="employeesDetails.telephone"
+          name="telephone"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Электронная почта</label>
+        <input
+          class="form-control"
+          id="email"
+          required
+          [(ngModel)]="employeesDetails.email"
+          name="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Адрес</label>
+        <input
+          class="form-control"
+          id="address"
+          required
+          [(ngModel)]="employeesDetails.address"
+          name="address"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="education">Образование</label>
+        <input
+          class="form-control"
+          id="education"
+          required
+          [(ngModel)]="employeesDetails.education"
+          name="education"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="inn">ИНН</label>
+        <input
+          class="form-control"
+          id="inn"
+          required
+          [(ngModel)]="employeesDetails.inn"
+          name="inn"
+        />
+      </div>
+
+
+
+        <h6 *ngIf="employeesError" style="color:red">Необходимо заполнить поле сотрудника</h6>
+      <button  (click)="saveEmployeesDetails()" class="btn btn-success">Отправить</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Инфромационная карта успешно создана!</h4>
+      <button class="btn btn-success" (click)="newEmployeesDetails()">Добавить</button>
+    </div>
+  </div>
+</div>
